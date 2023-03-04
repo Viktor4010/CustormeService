@@ -12,6 +12,7 @@ import javax.validation.Valid;
 @RequestMapping("client")
 public class ClientController {
 
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDTO> retrieveClient() {
         // todo
