@@ -1,6 +1,7 @@
 package ru.ivanov.CustomerService.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "address")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Address {
     @Id
     @Column(name = "id")
@@ -28,6 +30,6 @@ public class Address {
     private int streetNumber;
 
     @OneToOne
-    @JoinColumn(name = "client", referencedColumnName = "name")
+    @JoinColumn(name = "client", referencedColumnName = "id")
     private Client client;
 }

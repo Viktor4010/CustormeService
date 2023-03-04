@@ -17,8 +17,12 @@ public class AddressService {
     }
 
     @Transactional
-    public void updateAddress(Address address, int id) {
-        address.setId(id);
-        addressRepository.save(address);
+    public void updateAddress(int id, Address updatedAddress) {
+        Address addressToBeUpdated = addressRepository.findById(id);
+
+        updatedAddress.setId(id);
+        updatedAddress.setClient(addressToBeUpdated.getClient());
+
+        addressRepository.save(updatedAddress);
     }
 }

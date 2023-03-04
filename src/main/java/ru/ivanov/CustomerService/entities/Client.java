@@ -1,21 +1,21 @@
 package ru.ivanov.CustomerService.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "client")
 @Getter
 @Setter
-public class Client implements Serializable {
+@NoArgsConstructor
+public class Client {
 
-    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -36,6 +36,6 @@ public class Client implements Serializable {
     @NotNull
     private LocalDateTime registerAt;
 
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "client",cascade = CascadeType.PERSIST)
     private Address address;
 }

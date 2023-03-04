@@ -7,7 +7,6 @@ import ru.ivanov.CustomerService.entities.Client;
 import ru.ivanov.CustomerService.repositories.ClientRepository;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -19,14 +18,13 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Client> fetchClient(String name, String surname) {
-        Optional<Client> foundClient = clientRepository.findByNameAndSurname(name, surname);
-
-        return Optional.ofNullable(foundClient.orElseThrow(IllegalArgumentException::new));
+    public Client fetchClient(String name, String surname) {
+           return clientRepository.findByNameAndSurname(name,surname);
     }
 
     @Transactional
     public void saveClientToDB(Client client) {
+        client.getAddress().setClient(client);
         enrichClient(client);
         clientRepository.save(client);
     }

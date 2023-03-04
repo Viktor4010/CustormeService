@@ -6,4 +6,5 @@ import ru.ivanov.CustomerService.entities.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
+    Address findById(int id);
 }

@@ -2,7 +2,7 @@ package ru.ivanov.CustomerService.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.ivanov.CustomerService.entities.Address;
+
 
 import javax.validation.constraints.NotEmpty;
 
@@ -18,5 +18,7 @@ public class ClientDTO {
     @NotEmpty(message = "profession should not be empty")
     private String profession;
 
-    private Address address;
+    private AddressDTO addressDTO;
+
+
 }
