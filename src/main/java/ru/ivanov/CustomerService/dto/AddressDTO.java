@@ -2,11 +2,7 @@ package ru.ivanov.CustomerService.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.ivanov.CustomerService.entities.Client;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,6 +17,4 @@ public class AddressDTO {
     @Min(value = 1, message = "Street number should be positive and more then 1")
     private int streetNumber;
 
-
-    private Client client;
 }
