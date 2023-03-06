@@ -14,7 +14,7 @@ public class AddressDTO {
     private String street;
 
     @NotNull(message = "Street number should not be empty")
-    @Min(value = 1, message = "Street number should be positive and more then 1")
+    @Min(value = 1, message = "Street number must be positive and more then zero!!!")
     private int streetNumber;
 
 }
