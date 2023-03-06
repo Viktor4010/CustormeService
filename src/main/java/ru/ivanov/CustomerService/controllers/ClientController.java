@@ -11,6 +11,8 @@ import ru.ivanov.CustomerService.dto.AddressDTO;
 import ru.ivanov.CustomerService.dto.ClientDTO;
 import ru.ivanov.CustomerService.entities.Client;
 import ru.ivanov.CustomerService.services.ClientService;
+import ru.ivanov.CustomerService.util.ErrorsUtil;
+import ru.ivanov.CustomerService.validators.CustomerValidator;
 
 import javax.validation.Valid;
 
@@ -19,11 +21,14 @@ public class ClientController {
 
     private final ClientService clientService;
     private final ModelMapper modelMapper;
+    private final CustomerValidator customerValidator;
+
 
     @Autowired
-    public ClientController(ClientService clientService, ModelMapper modelMapper) {
+    public ClientController(ClientService clientService, ModelMapper modelMapper, CustomerValidator customerValidator) {
         this.clientService = clientService;
         this.modelMapper = modelMapper;
+        this.customerValidator = customerValidator;
     }
 
     @GetMapping(value = "client", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,11 +54,11 @@ public class ClientController {
     @PostMapping(value = "client/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> register(@RequestBody @Valid ClientDTO clientDTO,
                                          BindingResult bindingResult) {
-
         Client client = convertToClient(clientDTO);
 
+        customerValidator.validate(client, bindingResult);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            ErrorsUtil.responseToClientForIncorrectClientInputData(bindingResult);
         }
 
         clientService.saveClientToDB(client);

@@ -18,6 +18,7 @@ public class AddressService {
 
     @Transactional
     public void updateAddress(int id, Address updatedAddress) {
+
         Address addressToBeUpdated = addressRepository.findById(id);
 
         updatedAddress.setId(id);

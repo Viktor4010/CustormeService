@@ -7,6 +7,7 @@ import ru.ivanov.CustomerService.entities.Client;
 import ru.ivanov.CustomerService.repositories.ClientRepository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -27,6 +28,14 @@ public class ClientService {
         client.getAddress().setClient(client);
         enrichClient(client);
         clientRepository.save(client);
+    }
+
+    public Optional<Client> fetchClientByHisName(String name) {
+        return clientRepository.findClientByName(name);
+    }
+
+    public Optional<Client> fetchClientByHisSurname(String surname) {
+        return clientRepository.findClientBySurname(surname);
     }
 
     private void enrichClient(Client client) {

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.ivanov.CustomerService.dto.AddressDTO;
 import ru.ivanov.CustomerService.entities.Address;
 import ru.ivanov.CustomerService.services.AddressService;
+import ru.ivanov.CustomerService.util.ErrorsUtil;
+
 
 import javax.validation.Valid;
 
@@ -21,7 +23,6 @@ public class AddressController {
 
     private final AddressService addressService;
     private final ModelMapper modelMapper;
-
 
     @Autowired
     public AddressController(AddressService addressService, ModelMapper modelMapper) {
@@ -34,9 +35,8 @@ public class AddressController {
                                               BindingResult bindingResult, @PathVariable("id") int id) {
         Address address = convertToAddress(addressDTO);
 
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        if (bindingResult.hasErrors())
+            ErrorsUtil.responseToClientForIncorrectClientInputData(bindingResult);
 
         addressService.updateAddress(id, address);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
