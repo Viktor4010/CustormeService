@@ -3,7 +3,7 @@ package ru.ivanov.CustomerService.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.ivanov.CustomerService.exceptions.IncorrectClientInputDataException;
+import ru.ivanov.CustomerService.exceptions.IncorrectInputDataException;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
-    public ResponseEntity<ExceptionResponse> handler (IncorrectClientInputDataException exception) {
+    public ResponseEntity<ExceptionResponse> handler (IncorrectInputDataException exception) {
         ExceptionResponse response = new ExceptionResponse(exception.getMessage(), LocalDateTime.now());
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

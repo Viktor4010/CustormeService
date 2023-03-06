@@ -2,7 +2,7 @@ package ru.ivanov.CustomerService.util;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import ru.ivanov.CustomerService.exceptions.IncorrectClientInputDataException;
+import ru.ivanov.CustomerService.exceptions.IncorrectInputDataException;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ public class ErrorsUtil {
                     .append("; ");
         }
 
-        throw new IncorrectClientInputDataException(errorMsg.toString());
+        throw new IncorrectInputDataException(errorMsg.toString());
     }
 }
