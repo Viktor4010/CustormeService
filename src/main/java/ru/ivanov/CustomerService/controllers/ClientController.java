@@ -15,6 +15,8 @@ import ru.ivanov.CustomerService.util.ErrorsUtil;
 import ru.ivanov.CustomerService.validators.CustomerValidator;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ClientController {
@@ -29,6 +31,14 @@ public class ClientController {
         this.clientService = clientService;
         this.modelMapper = modelMapper;
         this.customerValidator = customerValidator;
+    }
+
+    @GetMapping("clients")
+    public ResponseEntity<List<String>> getClientsNames() {
+        List<String> clients = clientService.findAll().stream()
+                .map(Client::getName).toList();
+
+        return ResponseEntity.ok(clients);
     }
 
     @GetMapping(value = "client", produces = MediaType.APPLICATION_JSON_VALUE)
