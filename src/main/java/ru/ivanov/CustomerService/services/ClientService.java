@@ -7,6 +7,7 @@ import ru.ivanov.CustomerService.entities.Client;
 import ru.ivanov.CustomerService.repositories.ClientRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,10 @@ public class ClientService {
     @Transactional(readOnly = true)
     public Client fetchClient(String name, String surname) {
            return clientRepository.findByNameAndSurname(name,surname);
+    }
+
+    public List<Client> findAll()  {
+       return clientRepository.findAll();
     }
 
     @Transactional
