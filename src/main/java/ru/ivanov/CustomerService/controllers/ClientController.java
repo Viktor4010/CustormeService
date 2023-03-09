@@ -16,7 +16,6 @@ import ru.ivanov.CustomerService.validators.CustomerValidator;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class ClientController {
